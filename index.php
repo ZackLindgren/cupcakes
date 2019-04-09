@@ -46,7 +46,9 @@
         $chosen = array();
         foreach($flavors as $flavor)
         {
-            if (isset($_POST["$flavor"]))
+            $key = array_search("$flavor", $flavors);
+
+            if (isset($_POST["$key"]))
             {
                 $chosen[] = $flavor;
             }
@@ -63,6 +65,7 @@
             $name = $_POST['name'];
             $price = 3.5;
             $total = count($chosen) * $price;
+            $total = number_format("$total",2);
 
             echo "<h2>Thank you, $name, for your order!</h2>";
             echo "<p>Order Summary:</p><ul>";
@@ -101,7 +104,8 @@
         <?php
             foreach ($flavors as $flavor)
             {
-                echo "<input type='checkbox' name='$flavor' value='$flavor'> $flavor<br>";
+                $key = array_search("$flavor", $flavors);
+                echo "<input type='checkbox' name='$key' value='$key'> $flavor<br>";
             }
         ?>
 
